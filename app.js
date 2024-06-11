@@ -8,7 +8,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Header from  "./components/Header";
-import Rescard from "./components/Rescard";
+
 import Body from "./components/Body";
 import About from "./components/About";
 

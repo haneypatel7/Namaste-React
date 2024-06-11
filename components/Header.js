@@ -14,8 +14,8 @@ const Header=()=>{
           <a className="nav-link active" aria-current="page" href="#">MENU</a>
         </li>
 
-        <li className="nav-item">
-          <Link to={"/about"}>About Us</Link>
+        <li className="nav-item2">
+          <Link className="a1" to={"/about"}>About Us</Link>
         </li>
 
         <li className="nav-item">
