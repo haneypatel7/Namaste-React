@@ -119,6 +119,8 @@ const Body=()=>
                     <Rescard resData={resobj[2]}/> */}
                     
                     
+
+
                          {listOfRestaurants.map((ress, id) => (
                             <Rescard key={id} resData={ress} />
                         ))}

@@ -1,0 +1,114 @@
+import { useState } from "react";
+
+import User from "./User";
+const userobj=[
+    {
+        img:"./main.jpeg",
+        name:"haney",
+        location:"surat",
+        contact:"7473840293",
+    },
+    {
+        name:"raj",
+        location:"surat",
+        contact:"12892382398",
+    },
+    {
+        name:"patel",
+        location:"surat",
+        contact:"03039393939",
+    },
+    {
+        name:"raj",
+        location:"surat",
+        contact:"12892382398",
+    },
+    {
+        name:"raj",
+        location:"surat",
+        contact:"12892382398",
+    },
+    {
+        name:"raj",
+        location:"surat",
+        contact:"12892382398",
+    },
+    {
+        name:"raj",
+        location:"surat",
+        contact:"12892382398",
+    }
+
+]
+const About=()=>{
+    
+        const[searchname,setname]=useState('');
+        const[firstfilter,secondfilter]=useState([userobj]);
+        return(
+        
+            <div className="aboutus">
+
+                <div className="search-user">
+                    <input type="text" value={searchname} onChange={(e)=>
+                        {
+                            setname(e.target.value);
+                        }
+                    }></input>
+                    
+                </div>
+
+                <div className="btn-search">
+                    <button onClick={()=>
+                        {
+                            if (searchname.trim() === '') {
+                                secondfilter(userobj);
+                            } else {
+                                const newdata1 = userobj.filter((e) =>
+                                    e.name.toLowerCase().includes(searchname.toLowerCase())
+                                );
+                                secondfilter(newdata1);
+                            }
+
+                        }
+                        
+                    }>
+                        search by name
+                    </button>
+                    
+                </div>
+            <div className="user-container">
+                
+                
+                
+               {
+                firstfilter.map((res,id)=>
+                (
+                    <User key={id} userdata={res}/>
+
+                ))
+               }
+                
+                
+
+            </div>
+
+            </div>
+
+        );
+    };
+
+
+
+// const About = () => {
+//     return (
+//         <div>
+//             <h3>about us page render</h3>
+//             <h2>opps</h2>
+//         </div>
+//     );
+// };
+
+
+
+
+    export default About;
