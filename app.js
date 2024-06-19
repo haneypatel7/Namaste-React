@@ -8,9 +8,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Header from  "./components/Header";
-
+import Error from "./components/Error";
 import Body from "./components/Body";
 import About from "./components/About";
+import Menu from "./components/Menu";
 
 import { RouterProvider, createBrowserRouter,Outlet } from "react-router-dom";
 
@@ -124,9 +125,9 @@ const App=()=>
         <div className="application">
 
         <Header/>
+        <Outlet/>
         
-        <Body/>
-        {/* <Outlet/> */}
+        
 
 
         </div>
@@ -145,14 +146,42 @@ const App=()=>
         //       path: '/about',
         //       element: <About/>,
         //     },]
+        // {
+        //     path:"/",
+        //     element:<App/>,
+        //     errorElement:<Error/>,
+        // },
+        // {
+        //     path:"/about",
+        //     element:<About />,
+
+
+        // },
         {
             path:"/",
             element:<App/>,
-        },
-        {
-            path:"/about",
-            element:<About />
-        },
+
+            children:[
+                {
+                    path:"/",
+                    element:<Body/>,
+                }
+                ,
+                {
+                    path:"/about",
+                    element:<About/>,
+                },
+                {
+                    path:"/contact",
+                    
+                },
+                {
+                    path:"/Resturant/:resId",
+                    element:<Menu/>
+                }
+            ],
+            // errorElement:<Error/>,
+        }
         
     ]);
 

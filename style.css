@@ -36,3 +36,15 @@
 {
     text-decoration: none;
 }
+
+
+.nav-item{
+    padding-top: 8px;
+    padding-right: 7px;
+  }
+
+
+.user-div
+    {
+        border: 1px solid black;
+    }
