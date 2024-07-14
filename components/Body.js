@@ -1,136 +1,122 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Rescard from "./Rescard";
-const resobj=[
+import Studdata from "./Studdata";
+import Addstudent from "./Addstudent";
 
+const studentlist = [
+  {
+    name: "haney",
+    age: 21,
+  },
+  {
+    name: "raj",
+    age: 20,
+  },
+  {
+    name: "harshiv",
+    age: 22,
+  },
+];
 
-    {
-          resname:'kfc',
-          rating:'5 star',
-          rating1:3
-  
-      },
-      {
-          resname:'MCD',
-          rating:'4 star',
-          rating1:5
+function addstudent(n, a) {
+  studentlist.push({ name: n, age: a });
+  console.log(studentlist);
+}
 
-  
-      },
-      {
-          resname:'DOMINO',
-          rating:'3 star',
-          rating1:5
+const resobj = [
+  {
+    resname: 'kfc',
+    rating: '5 star',
+    rating1: 3,
+  },
+  {
+    resname: 'MCD',
+    rating: '4 star',
+    rating1: 5,
+  },
+  {
+    resname: 'DOMINO',
+    rating: '3 star',
+    rating1: 5,
+  },
+  {
+    resname: 'DOMINO',
+    rating: '3 star',
+    rating1: 3,
+  },
+  {
+    resname: 'DOMINO',
+    rating: '3 star',
+    rating1: 3,
+  },
+  {
+    resname: 'DOMINO',
+    rating: '3 star',
+    rating1: 3,
+  },
+];
 
-  
-      }
-      ,
-      {
-          resname:'DOMINO',
-          rating:'3 star',
-          rating1:3
-  
-      }
-      ,
-      {
-          resname:'DOMINO',
-          rating:'3 star',
-          rating1:3
-  
-      }
-      ,
-      {
-          resname:'DOMINO',
-          rating:'3 star',
-          rating1:3
-  
-      }
-  ]
-const Body=()=>
-    {
-        const[searchText,setText]=useState('');
-        const[s1,s2]=useState('');
+const Body = () => {
+  const [searchText, setText] = useState('');
+  const [listOfRestaurants, setListOfRestaurants] = useState(resobj);
 
-        const [listOfRestaurants, setListOfRestaurants] = useState([resobj]);
+  useEffect(() => {
+    // Uncomment and implement fetchdata if necessary
+    // fetchdata();
+  }, []);
 
+  // const fetchdata = async () => {
+  //   const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+  //   const json = await data.json();
+  //   console.log(json);
+  // };
 
-        console.log(searchText);
-        
-        return(
+  return (
+    <div className="body">
+      <div className="search">
+        <input
+          type="text"
+          value={searchText}
+          onChange={(e) => {
+            setText(e.target.value);
+          }}
+        />
+        <button
+          onClick={() => {
+            const newdata = resobj.filter((res) =>
+              res.resname.toLowerCase().includes(searchText.toLowerCase())
+            );
+            setListOfRestaurants(newdata);
+          }}
+        >
+          Search
+        </button>
 
-            <div className="body">
-                <div className="search">
-                    <input type="text"
-                    value={searchText}
-                    onChange={(e)=>
-                        {
-                            setText(e.target.value);
-                        }
-                    }
-                    
-                    ></input>
+        <button
+          onClick={() => {
+            const newdata1 = resobj.filter((e) => e.rating1 >= 4);
+            setListOfRestaurants(newdata1);
+          }}
+        >
+          Best Hotel
+        </button>
+      </div>
 
+      <div className="res-container">
+        {listOfRestaurants.map((ress, id) => (
+          <Rescard key={id} resData={ress} />
+        ))}
+      </div>
 
-                    <button 
-                    onClick={() => {
-                        // * Filter th restaurant cards and update the UI
-                        // * searchText
-                        console.log(searchText);
+      <div className="studcontainer">
+        {studentlist.map((data, index) => (
+          <Studdata key={index} stud={data} />
+        ))}
+      </div>
 
-                        const newdata = resobj.filter((res) =>
-                            res.resname.toLowerCase().includes(searchText.toLowerCase())
-                        );
+      <Addstudent adduser={addstudent} />
+    </div>
+  );
+};
 
-                        setListOfRestaurants(newdata);
-                        
-                        
-          
-                        
-                      }}
-                    >Search</button>
-
-                    {/* <input
-                    type="text"
-                    value={s1}
-                    onChange={(e)=>
-                        {
-                            s2(e.target.value);
-                        }}  
-
-                    ></input> */}
-
-                    <button
-                    onClick={()=>
-                        {
-                        const newdata1=resobj.filter((e)=>
-                            e.rating1>=4
-                        );
-                         console.log(newdata1);   
-                        setListOfRestaurants(newdata1);
-
-                        }
-
-                    }   
-                    >best hotel</button>
-                  
-                </div>
-                <div className="res-container">
-                    {/* <Rescard resData={resobj[0]}/>
-                    <Rescard resData={resobj[1]}/>
-                    <Rescard resData={resobj[2]}/> */}
-                    
-                    
-
-
-                         {listOfRestaurants.map((ress, id) => (
-                            <Rescard key={id} resData={ress} />
-                        ))}
-                    
-
-                </div>
-
-
-            </div>
-        )
-    };
-
-    export default Body;
+export default Body;
